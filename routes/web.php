@@ -21,3 +21,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
+
+// 管理者によるユーザー登録処理のルート
+Route::post('/admin/register', [App\Http\Controllers\AdminController::class, 'register'])->name('admin.register');
+
