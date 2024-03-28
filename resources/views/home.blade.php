@@ -14,7 +14,16 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{-- ユーザーのroleに基づいたメッセージを表示 --}}
+                    @if(Auth::user()->role === 'teacher')
+                        <p>{{ __('Welcome, Teacher! Here you can manage tasks.') }}</p>
+                        {{-- 先生専用のコンポーネントを表示 --}}
+                        <x-teacher_view />
+                    @elseif(Auth::user()->role === 'student')
+                        <p>{{ __('Welcome, Student! Here you can view your tasks.') }}</p>
+                        {{-- 生徒専用の情報を表示 --}}
+                        <x-student_view />
+                    @endif
                 </div>
             </div>
         </div>
