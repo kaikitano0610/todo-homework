@@ -31,4 +31,4 @@ Route::post('/admin/register', [App\Http\Controllers\AdminController::class, 're
 
 Route::get("/home/task_create",[TaskController::class,"create"])->name("tasks.create");
 
-Route::post("/posts",[TaskController::class,"store"])->name("posts.store");
+Route::post("/tasks",[TaskController::class,"store"])->name("tasks.store");
