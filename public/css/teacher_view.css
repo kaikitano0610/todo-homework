@@ -1,0 +1,59 @@
+/* 全体のフォント、背景色などの基本設定 */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+/* 各セクションのスタイリング */
+section {
+  background-color: white;
+  margin: 20px;
+  padding: 15px;
+  border-radius: 8px; /* 角丸の設定 */
+}
+
+/* タイトルのスタイリング */
+h1 {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* 宿題コンテナのスタイリング */
+.task-container, .comment-container, .question-container {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* ボタン共通のスタイリング */
+.btn-register-task, .btn-register-comment {
+  display: block;
+  text-align: center;
+  background-color: #008CBA;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+/* ボタンホバー時の効果 */
+.btn-register-task:hover, .btn-register-comment:hover {
+  background-color: #005f73;
+}
+
+/* 質問アイテムのスタイリング */
+.question-item {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+/* 最後の質問アイテムの境界線を取り除く */
+.question-item:last-child {
+  border-bottom: none;
+}
