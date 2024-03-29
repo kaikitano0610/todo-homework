@@ -4,7 +4,7 @@
   <div class="task-container">
       <!-- ここに宿題が動的に表示されます -->
   </div>
-  {{-- <a href="{{ route('tasks.create') }}" class="btn-register-task">宿題を登録する</a> --}}
+  <a href="{{ route('tasks.create') }}" class="btn-register-task">宿題を登録する</a>
 </section>
 
 <!-- コメントセクション -->

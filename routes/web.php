@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\TaskController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +29,6 @@ Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->na
 // 管理者によるユーザー登録処理のルート
 Route::post('/admin/register', [App\Http\Controllers\AdminController::class, 'register'])->name('admin.register');
 
+Route::get("/home/task_create",[TaskController::class,"create"])->name("tasks.create");
+
+Route::post("/tasks",[TaskController::class,"store"])->name("tasks.store");
