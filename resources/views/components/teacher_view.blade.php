@@ -13,7 +13,7 @@
   <div class="comment-container">
       <!-- ここにコメントが動的に表示されます -->
   </div>
-  {{-- <a href="{{ route('comments.create') }}" class="btn-register-comment">コメントを登録する</a> --}}
+  <a href="{{ route('comments.create') }}" class="btn-register-comment">コメントを登録する</a>
 </section>
 
 <!-- 質問セクション -->
