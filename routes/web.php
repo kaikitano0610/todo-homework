@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\CommentController;
 
 
 /*
@@ -38,3 +39,9 @@ Route::get("/home/comment_create",[TaskController::class,"comment"])->name("comm
 Route::post("/comments",[TaskController::class,"storeComment"])->name("comment.store");
 
 Route::post('/tasks/{task}/images', [TaskController::class, 'storeImage'])->name('tasks.storeImage');
+
+// コメント編集ページのルート
+Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+
+// コメント更新処理のルート
+Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');

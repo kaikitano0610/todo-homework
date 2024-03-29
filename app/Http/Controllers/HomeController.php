@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Models\Task;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
+    $todayTasks = Task::whereDate('due_date', Carbon::today())->get();
+    $todayComments = Comment::whereDate('created_at', Carbon::today())->first(); 
+
+    return view('home', ['todayTasks' => $todayTasks, 'todayComments' => $todayComments]);
+    }   
+
+
+    
 }

@@ -20,7 +20,7 @@ class TaskController extends Controller
             'title' => 'required|string|max:30',
             'contents' => 'required|string|max:170',
             'due_date' => 'required|date', // due_dateがフォームから送信される場合
-            'image' => 'required|image|max:2048', // 画像に関するバリデーション
+            'image' => 'sometimes|image|max:2048', // 画像に関するバリデーション
             
         ]);
         
