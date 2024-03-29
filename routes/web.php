@@ -36,3 +36,5 @@ Route::post("/tasks",[TaskController::class,"storeTask"])->name("tasks.store");
 Route::get("/home/comment_create",[TaskController::class,"comment"])->name("comments.create");
 
 Route::post("/comments",[TaskController::class,"storeComment"])->name("comment.store");
+
+Route::post('/tasks/{task}/images', [TaskController::class, 'storeImage'])->name('tasks.storeImage');
