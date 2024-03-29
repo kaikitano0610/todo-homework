@@ -3,7 +3,7 @@
   <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form action="{{ route("tasks.store") }}" method="POST">
+            <form action="{{ route("tasks.store") }}" method="POST" enctype="multipart/form-data">
                 @csrf 
                 <div class="form-group">
                     <label>タイトル</label>
@@ -17,7 +17,10 @@
                     <label>締切日</label>
                     <input type="date" class="form-control" name="due_date">
                 </div>                
-                <button type="submit" class="btn btn-primary">作成</button>
+                @csrf
+                <input type="file" name="image" required>
+                <div><button type="submit" class="btn btn-primary">作成</button></div>
+                
             </form>
             @if ($errors->any())
                 <div class="alert alert-danger">

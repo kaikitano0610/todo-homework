@@ -20,6 +20,7 @@ class TaskController extends Controller
             'title' => 'required|string|max:30',
             'contents' => 'required|string|max:170',
             'due_date' => 'required|date', // due_dateがフォームから送信される場合
+            'image' => 'required|image|max:2048', // 画像に関するバリデーション
             
         ]);
         
@@ -32,7 +33,18 @@ class TaskController extends Controller
 
         $task->save();
 
-        return redirect()->route("home"); // 適切なリダイレクト先に変更してください
+         // 画像がアップロードされている場合
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('public/tasks');
+
+            // 画像情報をデータベースに保存
+            $task->images()->create([
+            'path' => $path,
+        ]);
+    }
+
+            return redirect()->route("home")->with('success', 'Task and image uploaded successfully.');
+
     }
 
     function comment()
@@ -54,5 +66,5 @@ class TaskController extends Controller
 
         return redirect()->route("home"); // 適切なリダイレクト先に変更してください
     }
-    
+            
 }
