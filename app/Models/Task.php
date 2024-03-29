@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     protected $fillable = ['title', 'contents', 'due_date', 'user_id'];
+
+    public function images()
+    {
+        return $this->hasMany("App\Models\Image");
+    }
 }
