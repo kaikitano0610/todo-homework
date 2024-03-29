@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -13,11 +14,11 @@ class TaskController extends Controller
         return view("admin_home.create_task");
     }
 
-    public function store(Request $request)
+    public function storeTask(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'contents' => 'required|string',
+            'title' => 'required|string|max:30',
+            'contents' => 'required|string|max:170',
             'due_date' => 'required|date', // due_dateがフォームから送信される場合
             
         ]);
@@ -30,6 +31,26 @@ class TaskController extends Controller
         $task->user_id = Auth::id();
 
         $task->save();
+
+        return redirect()->route("home"); // 適切なリダイレクト先に変更してください
+    }
+
+    function comment()
+    {
+        return view("admin_home.create_comment");
+    }
+
+    public function storeComment(Request $request)
+    {
+        $request->validate([
+            'content' => 'required|string|max:170',
+        ]);
+    
+        $comment = new Comment; 
+        $comment->content = $request->content;
+        $comment->user_id = Auth::id();
+
+        $comment->save();
 
         return redirect()->route("home"); // 適切なリダイレクト先に変更してください
     }
