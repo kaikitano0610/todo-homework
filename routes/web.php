@@ -31,4 +31,8 @@ Route::post('/admin/register', [App\Http\Controllers\AdminController::class, 're
 
 Route::get("/home/task_create",[TaskController::class,"create"])->name("tasks.create");
 
-Route::post("/tasks",[TaskController::class,"store"])->name("tasks.store");
+Route::post("/tasks",[TaskController::class,"storeTask"])->name("tasks.store");
+
+Route::get("/home/comment_create",[TaskController::class,"comment"])->name("comments.create");
+
+Route::post("/comments",[TaskController::class,"storeComment"])->name("comment.store");
