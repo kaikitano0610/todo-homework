@@ -18,7 +18,7 @@
                     <input type="date" class="form-control" name="due_date">
                 </div>                
                 @csrf
-                <input type="file" name="image">
+               <input type="file" name="images[]" multiple>
                 <div><button type="submit" class="btn btn-primary">作成</button></div>
                 
             </form>
