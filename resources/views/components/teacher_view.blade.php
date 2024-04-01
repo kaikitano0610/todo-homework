@@ -8,6 +8,13 @@
               <h2>{{ $task->title }}</h2>
               <!-- 他のタスクの詳細を表示 -->
           </div>
+          <div style="display: flex; align-items: center;">
+              <a href="{{ route('tasks.show', $task->id) }}" class="btn btn-primary">詳細へ</a>
+              <form action ="{{ route('tasks.destroy', $task->id) }}"method="post">
+                @csrf
+                @method("delete")
+                <button type="submit" value="削除" class="btn btn-secondary" onclick='return confirm("本当に削除しますか？");'>削除する</button>
+          </div>
           <hr>
       @endforeach
   </div>

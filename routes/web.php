@@ -45,3 +45,15 @@ Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name
 
 // コメント更新処理のルート
 Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+
+// タスクの詳細表示のルート
+Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
+
+// タスク編集ページへのルート
+Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+
+// タスク更新処理のルート
+Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
+
+//タスク削除
+Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');

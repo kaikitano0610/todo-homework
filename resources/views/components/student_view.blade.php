@@ -6,7 +6,11 @@
         @foreach($todayTasks as $task)
             <div class="task-item">
                 <h2>{{ $task->title }}</h2>
-                <!-- 他のタスクの詳細を表示 -->
+                <a href="{{ route('tasks.show', $task->id) }}" class="btn btn-primary">クリア</a>
+              <form action ="{{ route('tasks.destroy', $task->id) }}"method="post">
+                @csrf
+                @method("delete")
+                <button type="submit" value="削除" class="btn btn-secondary" onclick='return confirm("本当に削除しますか？");'>詳細をみる</button>
             </div>
             <hr>
         @endforeach
