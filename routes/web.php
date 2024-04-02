@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\CommentController;
+use App\Http\controllers\QuestionController;
 
 
 /*
@@ -46,8 +47,10 @@ Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name
 // コメント更新処理のルート
 Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
 
+
 // タスクの詳細表示のルート
 Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
+
 
 // タスク編集ページへのルート
 Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
@@ -57,3 +60,15 @@ Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.upda
 
 //タスク削除
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+
+// タスクをクリアするルート
+Route::put('/tasks/{task}/clear', [TaskController::class, 'clear'])->name('tasks.clear');
+
+// タスクのクリアを元に戻すルート
+Route::put('/tasks/{task}/undo', [TaskController::class, 'undo'])->name('tasks.undo');
+
+//質問のルート
+Route::post('/questions', [QuestionController::class, 'store'])->name('questions.store');
+
+//進捗のグラフ
+Route::get('/tasks/progress', 'TaskController@progress');

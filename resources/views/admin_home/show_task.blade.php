@@ -12,5 +12,6 @@
        @endforeach
     @endif
     <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-primary">編集</a>
+    <a href="{{ route('home', $task->id) }}" class="btn btn-secondary">ホームに戻る</a>
 </div>
 @endsection

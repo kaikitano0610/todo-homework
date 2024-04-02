@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Task_user extends Model
 {
-    use HasFactory;
+    protected $table = 'task_users'; // このモデルが参照するテーブル名
+
 }
