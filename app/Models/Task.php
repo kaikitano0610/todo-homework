@@ -16,4 +16,13 @@ class Task extends Model
     {
         return $this->hasMany("App\Models\Image");
     }
+    public function taskUsers()
+    {
+        return $this->hasMany('App\Models\Task_user');
+    }
+    public function questions()
+    {
+        return $this->hasMany('App\Models\Question');
+    }
+    
 }
