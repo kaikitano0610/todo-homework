@@ -1,8 +1,2 @@
-## ログインユーザー
-### 先生
-email : endo@test.com
-pass :jajajaja
-
-### 生徒
-email : niwa@test.com
-pass :jajajaja
+git add <conflicted-files>
+git commit -m "Resolve merge conflicts"
