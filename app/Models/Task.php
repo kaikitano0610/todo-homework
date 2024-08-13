@@ -9,6 +9,7 @@ class Task extends Model
 {
     protected $fillable = ['title', 'contents', 'due_date', 'user_id'];
 
+
      // due_dateをCarbonインスタンスとして扱う
      protected $dates = ['due_date'];
 
@@ -16,6 +17,7 @@ class Task extends Model
     {
         return $this->hasMany("App\Models\Image");
     }
+
     public function taskUsers()
     {
         return $this->hasMany('App\Models\Task_user');

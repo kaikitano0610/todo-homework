@@ -31,8 +31,7 @@ class TaskController extends Controller
             'contents' => 'required|string|max:170',
             'due_date' => 'required|date', // due_dateがフォームから送信される場合
             'images' => 'sometimes|array',
-            'images.*' => 'image|max:2048', // 画像ファイルの各項目に対するバリデーション
-            
+            'images.*' => 'image|max:2048', // 画像ファイルの各項目に対するバリデーション            
         ]);
         
         $task = new Task; 
@@ -44,6 +43,8 @@ class TaskController extends Controller
         $task->save();
 
          // 画像がアップロードされている場合
+
+            return redirect()->route("home")->with('success', 'Task and image uploaded successfully.');
          if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $path = $image->store('public/tasks');
@@ -180,5 +181,5 @@ class TaskController extends Controller
     
         return redirect()->back()->with('status', 'タスクのクリアが取り消されました！');
     }
-    
+            
 }

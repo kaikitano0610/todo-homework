@@ -72,3 +72,4 @@ Route::post('/questions', [QuestionController::class, 'store'])->name('questions
 
 //進捗のグラフ
 Route::get('/tasks/progress', 'TaskController@progress');
+
