@@ -1,0 +1,48 @@
+# Docker composeのバージョン指定
+version: '3.8'
+# servicesでアプリケーションを構成する各コンテナを定義
+services:
+    app:
+        build:
+            #イメージをビルド
+            context: .
+            dockerfile: Dockerfile
+        container_name: todo-homework-app #コンテナの名前付け
+        working_dir: /var/www #作業ディレクトリの指定
+        volumes:
+            #ホストとコンテナ内のディレクトリをマウント（ローカルの変更をコンテナ内に反映させる）
+            - .:/var/www
+        networks:
+            #他のサービスと連携するために同じネットワークに所属させる
+            - app-network
+    web:
+        image: nginx:alpine #ベースイメージを指定
+        container_name: todo-homework-web
+        ports:
+            #ホストとコンテナの間でポートをマッピング（ブラウザからの8080アクセスをコンテナ内の80にマッピング）
+            - "8080:80"
+        volumes:
+            - .:/var/www
+            - ./docker/nginx/conf.d:/etc/nginx/conf.d
+        networks:
+            - app-network
+
+    db:
+        image: mysql:5.7 #ベースイメージの指定
+        container_name: todo-homework-db
+        environment:
+            MYSQL_ROOT_PASSWORD: root_password
+            MYSQL_DATABASE: todo-homework
+        ports:
+            - "3306:3306"
+        volumes:
+            - db_data:/var/lib/mysql #データ永続化のためにディレクトリをボリュームにマウント（コンテナが削除されてもデータは失われない）
+        networks:
+            - app-network
+
+networks:
+    app-network:
+        driver: bridge #、ホストマシンと隔離されたネットワークを作成
+
+volumes:
+    db_data:
