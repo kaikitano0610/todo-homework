@@ -40,6 +40,19 @@ services:
         networks:
             - app-network
 
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin # phpMyAdminの公式イメージを指定
+        container_name: todo-homework-phpmyadmin
+        environment:
+            PMA_HOST: db
+            MYSQL_ROOT_PASSWORD: root_password
+        ports:
+            - "8081:80" # ホストの8081ポートをコンテナの80ポートにマッピング
+        depends_on:
+            - db
+        networks:
+            - app-network
+
 networks:
     app-network:
         driver: bridge #、ホストマシンと隔離されたネットワークを作成

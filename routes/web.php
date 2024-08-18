@@ -6,7 +6,6 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\CommentController;
 use App\Http\controllers\QuestionController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,49 +25,33 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
+// 管理者用のルート
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
+    Route::post('/admin/register', [App\Http\Controllers\AdminController::class, 'register'])->name('admin.register');
+});
 
-// 管理者によるユーザー登録処理のルート
-Route::post('/admin/register', [App\Http\Controllers\AdminController::class, 'register'])->name('admin.register');
+// 認証が必要なルート
+Route::middleware(['auth'])->group(function () {
+    Route::get("/home/task_create", [TaskController::class, "create"])->name("tasks.create");
+    Route::post("/tasks", [TaskController::class, "storeTask"])->name("tasks.store");
+    Route::get("/home/comment_create", [TaskController::class, "comment"])->name("comments.create");
+    Route::post("/comments", [TaskController::class, "storeComment"])->name("comment.store");
+    Route::post('/tasks/{task}/images', [TaskController::class, 'storeImage'])->name('tasks.storeImage');
 
-Route::get("/home/task_create",[TaskController::class,"create"])->name("tasks.create");
+    Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+    Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
 
-Route::post("/tasks",[TaskController::class,"storeTask"])->name("tasks.store");
+    Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
+    Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+    Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
+    Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+    Route::put('/tasks/{task}/clear', [TaskController::class, 'clear'])->name('tasks.clear');
+    Route::put('/tasks/{task}/undo', [TaskController::class, 'undo'])->name('tasks.undo');
+});
 
-Route::get("/home/comment_create",[TaskController::class,"comment"])->name("comments.create");
-
-Route::post("/comments",[TaskController::class,"storeComment"])->name("comment.store");
-
-Route::post('/tasks/{task}/images', [TaskController::class, 'storeImage'])->name('tasks.storeImage');
-
-// コメント編集ページのルート
-Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
-
-// コメント更新処理のルート
-Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
-
-
-// タスクの詳細表示のルート
-Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
-
-
-// タスク編集ページへのルート
-Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
-
-// タスク更新処理のルート
-Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
-
-//タスク削除
-Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
-
-// タスクをクリアするルート
-Route::put('/tasks/{task}/clear', [TaskController::class, 'clear'])->name('tasks.clear');
-
-// タスクのクリアを元に戻すルート
-Route::put('/tasks/{task}/undo', [TaskController::class, 'undo'])->name('tasks.undo');
-
-//質問のルート
+// 質問のルート
 Route::post('/questions', [QuestionController::class, 'store'])->name('questions.store');
 
-//進捗のグラフ
+// 進捗のグラフ
 Route::get('/tasks/progress', 'TaskController@progress');

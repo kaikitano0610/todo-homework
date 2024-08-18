@@ -13,7 +13,9 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @if (app()->environment('local', 'production'))
+        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @endif
 
     <link href="{{ asset('css/teacher_view.css') }}" rel="stylesheet">
 </head>
