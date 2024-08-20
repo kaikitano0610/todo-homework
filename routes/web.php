@@ -21,6 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// この一行で、/login,/logout,/register,/password/restなどのパスワード関連のコードとなる。
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
